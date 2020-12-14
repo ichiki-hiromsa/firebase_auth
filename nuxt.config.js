@@ -15,9 +15,17 @@ export default {
     ]
   },
 
+  router:{
+    middleware:[
+      'authWatcher'
+    ]
+  },
+
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
   ],
+
+  ssr:false,
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
