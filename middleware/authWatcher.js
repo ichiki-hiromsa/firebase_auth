@@ -11,6 +11,8 @@ export default async ({ store, parms, redirect, route }) => {
       }
       // ストアの情報書き換え→ミューテーションへ
       store.commit('setLoginInfo', loginInfo)
+      //actions呼び出し
+      store.dispatch('getUserInfo')
     } else {
       //storeのログイン情報を消す
       //ログイン画面に飛ばす。router.nameはurl

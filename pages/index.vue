@@ -1,7 +1,8 @@
 <template>
   <v-container>
     <div>
-      {{$store.getters.loginInfo}}
+      <!-- {{$store.getters.loginInfo}} -->
+      {{$store.getters.userInfo}}
       <v-text-field v-model="mail"></v-text-field>
       <v-text-field v-model="password"></v-text-field>
       <v-btn @click="createNewAccount">
@@ -45,14 +46,18 @@ export default {
       auth.createUserWithEmailAndPassword(this.mail,this.password)
       .then(user=>{
         console.log(user)
+        const db = this.$firebase.firestore()
+        db.doc(`users/${user.user.uid}`).set({
+          mail:this.mail
+        })
       })
     },
     // ログイン関数
     login(){
       const auth=this.$firebase.auth()
-      auth.signInWithEmailAndPassword(this.email,this.password)
+      auth.signInWithEmailAndPassword(this.mail,this.password)
       .then(user=>{
-        console.log(user)
+        console.log(user.user.uid)
       })
     }
   }
