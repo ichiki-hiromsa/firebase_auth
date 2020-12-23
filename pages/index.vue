@@ -2,6 +2,7 @@
   <v-container>
     <div>
       <!-- {{$store.getters.loginInfo}} -->
+      <div>トップページなり</div>
       {{$store.getters.userInfo}}
       <v-text-field v-model="mail"></v-text-field>
       <v-text-field v-model="password"></v-text-field>
@@ -29,15 +30,6 @@ export default {
     password:""
   }),
   mounted(){
-    //   middlewareに書く
-    //   const auth=this.$firebase.auth()
-    //   auth.onAuthStateChanged(user=>{
-    //   if(user){
-    //     console.log(user.uid)
-    //   }else{
-
-    //   }
-    // })
   },
   methods:{
     // アカウント作成関数
@@ -45,7 +37,7 @@ export default {
       const auth=this.$firebase.auth()
       auth.createUserWithEmailAndPassword(this.mail,this.password)
       .then(user=>{
-        console.log(user)
+        // console.log(user)
         const db = this.$firebase.firestore()
         db.doc(`users/${user.user.uid}`).set({
           mail:this.mail
